@@ -1,6 +1,8 @@
 # copy_the_indicators_used_in_the_template.py
 # version：0.5.14
 #   1、加入备份MT5 Scripts文件夹内的mqh文件操作  2019.12.3
+#   2. 对第1条备份MT5 Scripts文件夹程序段再次作修改，改为有含'a_'字符串文件均备份  2019.12.4
+#   3. 对特殊要求备份的文件改为含'a_'字符串特殊文件的备份  2019.12.4
 # version：0.5.13  2019.12.2
 #   加入部分MQL5特殊头文件备份程序段
 # version：0.5.12  2019.12.2
@@ -260,34 +262,35 @@ def run_main():
     print('\nTotal number of MT5 Expert Advisor files: ' + str(ea5_count) + '\n')   # 显示
     mqex_files += '\nTotal number of MT5 Expert Advisor files: ' + str(ea5_count) + '\n\n'  # 加入MT5 EA文件总数
 
-    '''MT5脚本Scripts文件备份'''
-    print('\nMT5 Scripts files:')
-    mqex_files += '\nMT5 Scripts files:\n'
-    '''读EA文件夹目录'''
+    '''MT5脚本Scripts自定义(custom)文件备份'''
+    print('\nMT5 scripts custom files:')
+    mqex_files += '\nMT5 scripts custom files:\n'
+    '''读Scripts文件夹目录'''
     result = os.listdir(path5+'\\MQL5\\Scripts')                    # 读文件夹
-    s5_count = 0                                                    # MT5 Scripts文件计数
-    '''遍历 *.mq5/.ex5 EA文件'''
+    s5_count = 0                                                    # MT5 scripts custom 文件计数
+    '''遍历 *.mq5/.ex5/.mqh scripts custom 文件'''
     for line in result:
         sourcefile = line                                           # 作文件名
         line = line.lower()                                         # 把所有字符中的大写字母转换成小写字母
-        if line.find('.mq5') >= 0 or line.find('.ex5') >= 0 or line.find('.mqh') >= 0:  # '.mq5'或'.ex5'或'.mqh'存在
+        #if line.find('.mq5') >= 0 or line.find('.ex5') >= 0 or line.find('.mqh') >= 0:  # '.mq5'或'.ex5'或'.mqh'存在
+        if line.find('a_') >= 0:                                    # 'a_'存在
             s5_count += 1                                           # 计数
             print('    ' + sourcefile)                          # 显示
             mqex_files += '    ' + sourcefile + '\n'                # 加入此文件名
-            shutil.copy2(path5+'\\MQL5\\Scripts\\'+sourcefile, mt5_s_path + '/')  # 复制MT5 Scripts文件
-    '''遍历MT5 Scripts文件结束,加入MT5 Scripts文件总数'''
-    print('\nTotal number of MT5 Scripts files: ' + str(s5_count) + '\n')   # 显示
-    mqex_files += '\nTotal number of MT5 Scripts files: ' + str(s5_count) + '\n\n'  # 加入MT5 Scripts文件总数
+            shutil.copy2(path5+'\\MQL5\\Scripts\\'+sourcefile, mt5_s_path + '/')  # 复制MT5 scripts custom 文件
+    '''遍历MT5 scripts custom 文件结束,加入MT5 scripts custom 文件总数'''
+    print('\nTotal number of MT5 scripts custom files: ' + str(s5_count) + '\n')   # 显示
+    mqex_files += '\nTotal number of MT5 scripts custom files: ' + str(s5_count) + '\n\n'  # 加入MT5 scripts custom 文件总数
 
     '''部分特殊指标文件备份'''
-    indicators_file = '指标例程.mq4'
+    indicators_file = 'a_指标例程.mq4'
     shutil.copy2(path+'\\MQL4\\Indicators\\' + indicators_file, i_path + '/')  # 复制特殊指标文件
     print('\n备份的特殊指标文件:')
     print('    ' + indicators_file)                             # 显示
     mqex_files += '\n备份的特殊指标文件:\n'
     mqex_files += '    ' + indicators_file                          # 加入特殊指标文件名
     '''部分特殊脚本文件备份'''
-    scripts_file = '脚本例程.mq4'
+    scripts_file = 'a_脚本例程.mq4'
     shutil.copy2(path+'\\MQL4\\Scripts\\' + scripts_file, s__path + '/')  # 复制特殊脚本文件
     print('备份的特殊脚本文件:')
     print('    ' + scripts_file)                                # 显示
