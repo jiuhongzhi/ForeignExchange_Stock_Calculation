@@ -349,7 +349,8 @@ def run_main():
         tf.write(mqex_files)                                        # 保存文件
 
 
-run_main()
+if __name__ == "__main__":
+    run_main()
 
 
 
