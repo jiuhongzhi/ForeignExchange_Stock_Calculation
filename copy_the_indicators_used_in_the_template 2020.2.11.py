@@ -1,6 +1,7 @@
 # copy_the_indicators_used_in_the_template.py
 本程序版本号 = '2020.2.11'
-#   增加备份MQL5指标文件夹内mqh头文件代码  2020.2.11
+#   1.增加备份MQL5指标文件夹内mqh头文件代码  2020.2.11
+#   2.MQL5的EA特殊头文件文件夹作修改  2020.2.11
 #本程序版本号 = '2020.1.10'
 #   子函数作了修改  2020.1.10
 # 本程序版本号 = '2020.1.2'
@@ -307,9 +308,9 @@ def run_main():
     备份类型1 = 备份类型2 = 'a_'
     mqex_files = backup_files(描述, sourcefile_path, 备份类型1, 备份类型2, mt5_s_path, mqex_files)  # 备份文件
 
-    描述 = '部分MQL5特殊头文件备份(a_)'
-    sourcefile_path = path5+'\\MQL5\\Include\\Expert'
-    备份类型1 = 备份类型2 = 'a_'
+    描述 = '部分MQL5特殊头文件备份(mqh)'
+    sourcefile_path = path5+'\\MQL5\\Experts'
+    备份类型1 = 备份类型2 = '.mqh'
     mqex_files = backup_files(描述, sourcefile_path, 备份类型1, 备份类型2, mt5_e_path, mqex_files)  # 备份文件
 
     描述 = 'MQL5指标文件备份(mq5ex5)'
